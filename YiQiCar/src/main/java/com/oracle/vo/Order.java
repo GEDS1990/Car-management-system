@@ -1,13 +1,11 @@
 package com.oracle.vo;
 
-import java.util.Date;
-
 public class Order {
     private Integer orderid;
 
     private String ordercode;
 
-    private Date orderdate;
+    private String orderdate;
 
     private String orderflag;
 
@@ -27,15 +25,15 @@ public class Order {
         this.ordercode = ordercode == null ? null : ordercode.trim();
     }
 
-    public Date getOrderdate() {
-        return orderdate;
-    }
+    public String getOrderdate() {
+		return orderdate;
+	}
 
-    public void setOrderdate(Date orderdate) {
-        this.orderdate = orderdate;
-    }
+	public void setOrderdate(String orderdate) {
+		this.orderdate = orderdate;
+	}
 
-    public String getOrderflag() {
+	public String getOrderflag() {
         return orderflag;
     }
 

@@ -47,6 +47,8 @@ public class UserHandler {
 				map.put("user",user);
 				return "index";
 			}else {
+				System.out.println("密码不对");
+				
 				return "redirect:/";
 			}
 		}	

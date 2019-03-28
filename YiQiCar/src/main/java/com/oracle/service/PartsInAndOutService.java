@@ -67,8 +67,20 @@ public class PartsInAndOutService {
 	
 	@Transactional
 	public void insertBill1(Integer count,Integer id) {
-		System.out.println("插入数据");
+		
 		dao.insertBill(count, id);
+	}
+	
+	@Transactional
+	public List<Map<String,Object>> getParts(Map<String,Object> map){
+		
+		return dao.getPartsByLike(map);
+	}
+	
+	@Transactional
+	public Map<String,Object> getSelected(Integer partsid){
+		
+		return dao.getSelected(partsid);
 	}
 	
 }

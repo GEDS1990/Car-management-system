@@ -17,7 +17,8 @@
 			property="billuser" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		billid, billflag, billtype, partsid, billcount, billtime, billuser
+		billid, billflag, billtype, partsid, billcount, billtime,
+		billuser
 	</sql>
 	<select id="selectByPrimaryKey"
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -29,15 +30,18 @@
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from biz_partsrepbill
-		where billid = #{billid,jdbcType=INTEGER}
+		where billid =
+		#{billid,jdbcType=INTEGER}
 	</delete>
 
 
 	<insert id="insert" parameterType="com.oracle.vo.PartsRepBill">
-		insert into biz_partsrepbill (billid, billflag, billtype,
+		insert into biz_partsrepbill
+		(billid, billflag, billtype,
 		partsid, billcount, billtime,
 		billuser,descript)
-		values (#{billid,jdbcType=INTEGER}, #{billflag,jdbcType=VARCHAR},
+		values (#{billid,jdbcType=INTEGER},
+		#{billflag,jdbcType=VARCHAR},
 		#{billtype,jdbcType=VARCHAR},
 		#{partsid,jdbcType=INTEGER}, #{billcount,jdbcType=INTEGER}, now(),
 		#{billuser,jdbcType=INTEGER},#{descript,jdbcType=VARCHAR})
@@ -122,55 +126,73 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.oracle.vo.PartsRepBill">
 		update biz_partsrepbill
-		set billflag = #{billflag,jdbcType=VARCHAR},
+		set billflag =
+		#{billflag,jdbcType=VARCHAR},
 		billtype = #{billtype,jdbcType=VARCHAR},
 		partsid = #{partsid,jdbcType=INTEGER},
-		billcount = #{billcount,jdbcType=INTEGER},
-		billtime = #{billtime,jdbcType=TIMESTAMP},
+		billcount =
+		#{billcount,jdbcType=INTEGER},
+		billtime =
+		#{billtime,jdbcType=TIMESTAMP},
 		billuser = #{billuser,jdbcType=INTEGER}
 		where billid = #{billid,jdbcType=INTEGER}
 	</update>
 
 	<select id="getAll" resultType="map">
+		SELECT distinct v.billflag,o.name
+		billtype,r.PartsName
+		partsname,p.billcount,p.billtime,e.name name
+		FROM
+		(SELECT c.name
+		billflag
+		from sys_code c ,biz_partsrepbill b
+		WHERE
+		c.`code`=b.billflag)
+		v,sys_code o,biz_partsrepbill p,biz_parts r,
+		sys_emp e
+		WHERE
+		o.`code`=p.billtype AND r.PartsId=p.partsid AND
+		e.id=p.billuser
+
+
+	</select>
+
+	<select id="getCode" resultType="map" parameterType="string">
+		select
+		code,name from sys_code where type=#{type}
+	</select>
+
+	<select id="getBillsByLike" parameterType="map" resultType="map">
 		SELECT distinct v.billflag,o.name billtype,r.PartsName
 		partsname,p.billcount,p.billtime,e.name name
 		FROM
-		(SELECT c.name billflag
+		(SELECT c.name
+		billflag
 		from sys_code c ,biz_partsrepbill b
-		WHERE c.`code`=b.billflag) v,sys_code o,biz_partsrepbill p,biz_parts
-		r,sys_emp e
-		WHERE o.`code`=p.billtype AND r.PartsId=p.partsid AND e.id=p.billuser
+		WHERE c.`code`=b.billflag)
+		v,sys_code o,biz_partsrepbill p,biz_parts r,
+		sys_emp e
+		WHERE
+		o.`code`=p.billtype AND r.PartsId=p.partsid AND e.id=p.billuser
+
+		<if test="map.partsname != null and map.partsname != ''">
+			and partsname like concat('%',#{map.partsname},'%')
+		</if>
+
+		<if test="map.billflag != null and map.billflag != ''">
+			and v.billflag = #{map.billflag}
+		</if>
+
+		<if test="map.billtype != null and map.billtype != ''">
+			and billtype = #{map.billtype}
+		</if>
+
+		<if test="map.billtime != null and map.billtime != null">
+			and p.billtime like concat {'%',#{map.billtime},'%'}
+		</if>
+
+
 	</select>
 
-	 <select id="getCode" resultType="map" parameterType="string">
-  		select code,name from sys_code where type=#{type}
-    </select>
-    
-    <select id="getBillsByLike" parameterType="map" resultType="map">
-    	SELECT distinct v.billflag,o.name billtype,r.PartsName
-		partsname,p.billcount,p.billtime,e.name name
-		FROM
-		(SELECT c.name billflag
-		from sys_code c ,biz_partsrepbill b
-		WHERE c.`code`=b.billflag) v,sys_code o,biz_partsrepbill p,biz_parts
-		r,sys_emp e
-		WHERE o.`code`=p.billtype AND r.PartsId=p.partsid AND e.id=p.billuser
-		
-		<trim>
-			<if test="map.billtype != null">
-				and billtype = #{map.billtype}
-			</if>
-			
-			<if test="map.partsname != null">
-			    and	partsname like concat('%',#{map.partsname},'%')
-			</if>
-			
-			<if test="map.billtime != null">
-				and p.billtime = #{map.billtime}
-			</if>
-		</trim>
-    
-    </select>
-    
 
 </mapper>

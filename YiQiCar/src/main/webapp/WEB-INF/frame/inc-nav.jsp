@@ -45,7 +45,7 @@ function urlTarget(urls) {
 	<ul id="browser" class="filetree">
 		<li><span class="folder">订单模块</span>
 			<ul>
-            	<li><span class="file"><a onclick="urlTarget('pages/ordersys/order/orderlist.html');">订单管理</a></span></li>
+            	<li><span class="file"><a onclick="urlTarget('pages/ordersys/order/orderlist/1');">订单管理</a></span></li>
 				<li><span class="file"><a onclick="urlTarget('pages/ordersys/order/orderchecklist.html');">订单审核</a></span></li>
 		  </ul>
 	  </li>

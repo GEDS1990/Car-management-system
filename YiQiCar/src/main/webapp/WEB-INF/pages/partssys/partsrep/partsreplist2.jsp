@@ -35,8 +35,7 @@
 		</div>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0"
 			class="commonTableSearch">
-			<form id="form-search" name="form-search" action="../getParts"
-				method="post">
+			<form id="form-search" name="form-search" action="" method="post">
 				<tr>
 					<th align="right">配件编码：</th>
 					<td><input name="partsid" type="text" class="inputTextNormal"
@@ -50,16 +49,13 @@
 			</form>
 		</table>
 
+
 		<!--//commonTableSearch-->
 
 		<input type="button" class="btnNormal" value="配件出入库"
 			onclick="location.href='${pageContext.request.contextPath }/pages/partssys/partsrep/partsrep'" />
 
-
-
-	
-
-		<form action="../getSelected" method="post" id="form1" name="form1">
+		<form action="getSelected" method="post" id="form1" name="form1">
 
 			<table width="101%" border="0" cellpadding="0" cellspacing="1"
 				class="commonTable">
@@ -78,11 +74,11 @@
 			<td align="center">30</td>
         </tr> -->
 
-				<c:forEach items="${pageInfo.list}" var="l" varStatus="s">
+				<c:forEach items="${ilist}" var="l" varStatus="s">
 					<tr>
 						<td align="center"><input type="checkbox" name="c"
 							value="${l.partsid}"></td>
-						<td align="center">${((pageInfo.pageNum-1)*pageInfo.pageSize)+s.count}</td>
+						<td align="center">${s.count}</td>
 						<td align="center">${l.partsid}</td>
 						<td align="center">${l.partsname}</td>
 						<td align="center">${l.partsreqcount}</td>
@@ -93,16 +89,16 @@
 			</table>
 
 		</form>
-		
-		
-		
-		
-		
-		
-		<!--//commonTable-->
+
 		<div id="pagelist">
 			<ul class="clearfix">
-				<li><a href="#" id="save" onclick="document:form1.submit()">确定</a></li>
+				<li><a href="#" onclick="document:form1.submit()">确定</a></li>
+			</ul>
+		</div>
+
+		<!--//commonTable-->
+		<%-- <div id="pagelist">
+			<ul class="clearfix">
 				<li><a href="${pageInfo.firstPage}">首页</a></li>
 				<li><a href="${pageInfo.prePage}">上页</a></li>
 				<li><a href="${pageInfo.nextPage}">下页</a></li>
@@ -114,7 +110,7 @@
 				<li class="pageinfo">第${pageInfo.pageNum}页</li>
 				<li class="pageinfo">共${pageInfo.pages}页</li>
 			</ul>
-		</div>
+		</div> --%>
 	</div>
 	<!--//content pages wrap-->
 </body>

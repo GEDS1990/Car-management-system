@@ -125,7 +125,10 @@
 	
 	<select id="getPartsByLiike" resultMap="BaseResultMap" parameterType="String">
 		select PartsId, PartsName, PartsLoc, PartsProDate, PartsRemark
-		from biz_parts where PartsName like concat('%',#{PartsName},'%')
+		from biz_parts 
+		<where>
+		 	PartsName like concat('%',#{PartsName},'%')
+		</where>
 	</select>
 	
 </mapper>

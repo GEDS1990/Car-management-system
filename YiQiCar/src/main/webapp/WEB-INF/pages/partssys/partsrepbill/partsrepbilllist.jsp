@@ -51,10 +51,10 @@
        	<form id="form-search" name="form-search" action="../getBills" method="post">
         <tr>
             <th align="right">配件名称：</th>
-            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" style="width:93px" name="partsname"/></td>
+            <td><input type="text" class="inputTextNormal" id="textfield2" style="width:93px"/></td>
             <th align="right">出/入库：</th>
             <td>
-            	<select style="width:93px;" name="type" id="select">
+            	<select style="width:93px;" id="select" name="billflag">
 						<option value="">请选择</option>
 						<option value="out">出库</option>
 						<option value="in">入库</option>
@@ -68,7 +68,7 @@
             </td>
             <th align="right">出入库日期：</th>
             <td>
-            	<input name="textfield2" type="text" class="inputTextNormal" id="textfield2" name="billtime"/>
+            	<input type="text" class="inputTextNormal" id="textfield2" />
             </td>
             <th align="right">
 				<input type="submit" class="btnShort" value="检索" />

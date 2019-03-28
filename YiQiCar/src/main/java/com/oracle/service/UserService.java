@@ -14,7 +14,7 @@ public class UserService {
 	UserMapper userDao;
 	
 	@Transactional(readOnly=true)
-	public User login(String name,String password) {		
+	public User login(String name,String password) {
 		return userDao.selectByNameAndPwd(name, password);
 	}
 }

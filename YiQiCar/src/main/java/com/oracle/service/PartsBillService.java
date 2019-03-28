@@ -33,4 +33,6 @@ public class PartsBillService {
 	public List<Map<String,Object>> getBillsByLike(Map<String,Object> map){
 		return dao.getBillsByLike(map);
 	}
+	
+	
 }

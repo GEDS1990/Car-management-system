@@ -52,41 +52,15 @@ public class PartsHandler {
 	@RequestMapping("/search")
 	public String getPartsByLike(String PartsName,Map<String, Object> map) {
 		
-		if(PartsName == null) {
-			return "redirect:partslist/1";
-		}else {
 			List<Parts> list = new ArrayList<Parts>();
 
-			PageHelper.startPage(1, 5);
-
 			list = service.getPartsByLike(PartsName);
+			
+			map.put("pageInfo", list);
 
-			PageInfo<Parts> info = new PageInfo<Parts>(list);
-
-			map.put("pageInfo", info);
-
-			return "pages/partssys/parts/partslist";
-		}
+			return "pages/partssys/parts/partslist2";
 		
-		
-//		if(PartsName != null) {
-//			List<Parts> list = new ArrayList<Parts>();
-//
-//			PageHelper.startPage(1, 5);
-//
-//			list = service.getPartsByLike(PartsName);
-//			
-//			
-//			PageInfo<Parts> info = new PageInfo<Parts>(list);
-//
-//			map.put("pageInfo", info);
-//
-//			return "pages/partssys/parts/partslist";
-//		} else {
-//			
-//			return "redirect:/pages/partssys/parts/partslist/1";
-//		}
-//		
+			
 	}
 
 	@RequestMapping(value = "/{path}")

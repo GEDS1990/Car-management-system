@@ -1,6 +1,7 @@
 package com.oracle.handler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +112,35 @@ public class PartsInAndOutHandler {
 		return "redirect:/pages/partssys/partsrep/partsreplist/1";
 	}
 	
+	@RequestMapping("/getParts")
+	public String getParts(HttpSession session,Map<String,Object> map,Integer partsid,String partsname) {
+		
+		map.put("partsid",partsid);
+		map.put("partsname",partsname);
+		
+		List<Map<String,Object>> list = service.getParts(map);
+		
+		session.setAttribute("ilist", list);
+		
+		
+		return "/pages/partssys/partsrep/partsreplist2";
+	}
 	
 	
+	@RequestMapping("/getSelected")
+	public String getSelected(Integer [] c,HttpSession session) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		
+		for(int i = 0 ; i < c.length ; i++) {
+			Map<String,Object> map = service.getSelected(c[i]);
+			list.add(map);
+		}
+		
+		session.setAttribute("iilist", list);
+		
+		return "redirect:/pages/ordersys/order/orderadd";
+	}
 	
 }

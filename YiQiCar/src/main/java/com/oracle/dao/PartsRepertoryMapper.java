@@ -39,4 +39,12 @@ public interface PartsRepertoryMapper {
     
     void insertBill(@Param("partsid")Integer partsid,@Param("partsreqcount") Integer partsidreqcount);
     
+    
+    List<Map<String,Object>> getReps(Map<String,Object> map);
+    
+    List<Map<String,Object>> getPartsByLike(Map<String,Object> map);
+    
+    Map<String,Object> getSelected(Integer partsid);
+    
+    
 }

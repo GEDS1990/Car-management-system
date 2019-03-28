@@ -29,7 +29,7 @@
 		$("#select").blur(function(){
 			$("#select1").empty();
 			var inout = document.getElementById("select").value;
-			$.getJSON("../getJsons?inout="+inout,{},function(data){
+			$.getJSON("getJsons?inout="+inout,{},function(data){
 				for(var i = 0; i < data.length; i++){
 					$("#select1").append($("<option></option>").text(data[i].name).val(data[i].code))
 				}
@@ -48,13 +48,13 @@
 	  <h2>&gt;&gt; 配件库存流水账查询</h2>
 	</div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="commonTableSearch" style="font-size:13px;">
-       	<form id="form-search" name="form-search" action="../getBills" method="post">
+       	<form id="form-search" name="form-search" action="" method="post">
         <tr>
             <th align="right">配件名称：</th>
-            <td><input name="textfield2" type="text" class="inputTextNormal" id="textfield2" style="width:93px" name="partsname"/></td>
+            <td><input type="text" name="partsname" class="inputTextNormal" id="textfield2" style="width:93px"/></td>
             <th align="right">出/入库：</th>
             <td>
-            	<select style="width:93px;" name="type" id="select">
+            	<select style="width:93px;" name="billflag" id="select">
 						<option value="">请选择</option>
 						<option value="out">出库</option>
 						<option value="in">入库</option>
@@ -68,7 +68,7 @@
             </td>
             <th align="right">出入库日期：</th>
             <td>
-            	<input name="textfield2" type="text" class="inputTextNormal" id="textfield2" name="billtime"/>
+            	<input type="text" class="inputTextNormal" id="textfield2" name="billtime"/>
             </td>
             <th align="right">
 				<input type="submit" class="btnShort" value="检索" />
@@ -91,9 +91,9 @@
             <th>操作人</th>
         </tr>
        
-       <c:forEach items="${pageInfo.list}" var="s" varStatus="l" >
+       <c:forEach items="${info}" var="s" varStatus="l" >
        		<tr>
-            <td align="center">${((pageInfo.pageNum-1)*pageInfo.pageSize)+l.count}</td>
+            <td align="center">${l.count}</td>
             <td align="center">${s.billflag}</td>
             <td align="center">${s.billtype}</td>
 			<td align="center">${s.partsname}</td>
@@ -117,20 +117,20 @@
         
   </table>
     <!--//commonTable-->
-    <div id="pagelist">
+    <%-- <div id="pagelist">
     	<ul class="clearfix">
-				<li><a href="${pageInfo.firstPage}">首页</a></li>
-				<li><a href="${pageInfo.prePage}">上页</a></li>
-				<li><a href="${pageInfo.nextPage}">下页</a></li>
+				<li><a href="${info.firstPage}">首页</a></li>
+				<li><a href="${info.prePage}">上页</a></li>
+				<li><a href="${info.nextPage}">下页</a></li>
 				<li class="current"><input type="text"
 					style="text-align: right" size="1" id="no"
-					value="${pageInfo.pageNum}"></li>
+					value="${info.pageNum}"></li>
 				<li><a href="javascript:void(0)" onclick="getNum()">跳转</a></li>
-				<li><a href="${pageInfo.lastPage}">尾页</a></li>
-				<li class="pageinfo">第${pageInfo.pageNum}页</li>
-				<li class="pageinfo">共${pageInfo.pages}页</li>
+				<li><a href="${info.lastPage}">尾页</a></li>
+				<li class="pageinfo">第${info.pageNum}页</li>
+				<li class="pageinfo">共${info.pages}页</li>
 			</ul>
-    </div>
+    </div> --%>
 </div>
 <!--//content pages wrap-->
 </body>
