@@ -7,8 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>物资采购与产品整合管理系统</title>
-<link href="${pageContext.request.contextPath }/css/main.css" rel="stylesheet" type="text/css" media="all" />
-<script src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<link href="${pageContext.request. contextPath }/css/main.css"
+	rel="stylesheet" type="text/css" media="all" />
+<script src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js"
+	type="text/javascript"></script>
 
 
 
@@ -53,7 +55,7 @@
        	<form id="form-search" name="form-search" action="../getBills" method="post">
         <tr>
             <th align="right">配件名称：</th>
-            <td><input type="text" class="inputTextNormal" id="textfield2" style="width:93px"/></td>
+            <td><input type="text" class="inputTextNormal" name="partsname" id="textfield2" style="width:93px"/></td>
             <th align="right">出/入库：</th>
             <td>
             	<select style="width:93px;" id="select" name="billflag">
@@ -68,10 +70,7 @@
 						<option value="">请选择</option>
 				</select>
             </td>
-            <th align="right">出入库日期：</th>
-            <td>
-            	<input type="text" class="inputTextNormal" id="textfield2" />
-            </td>
+        
             <th align="right">
 				<input type="submit" class="btnShort" value="检索" />
 			</th>
@@ -85,7 +84,6 @@
     <table width="101%" border="0" cellpadding="0" cellspacing="1" class="commonTable">
         <tr>
             <th>序号</th>
-            <th>出/入库</th>
             <th>出入库类别</th>
             <th>配件名称</th>
             <th>数量</th>
@@ -96,12 +94,11 @@
        <c:forEach items="${pageInfo.list}" var="s" varStatus="l" >
        		<tr>
             <td align="center">${((pageInfo.pageNum-1)*pageInfo.pageSize)+l.count}</td>
-            <td align="center">${s.billflag}</td>
             <td align="center">${s.billtype}</td>
 			<td align="center">${s.partsname}</td>
 			<td align="center">${s.billcount}</td>
 			<td align="center">${s.billtime}</td>
-			<td align="center">${s.name}</td>
+			<td align="center">${s.empname}</td>
         </tr>
        </c:forEach>
       

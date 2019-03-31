@@ -139,22 +139,9 @@
 	</update>
 
 	<select id="getAll" resultType="map">
-		SELECT distinct v.billflag,o.name
-		billtype,r.PartsName
-		partsname,p.billcount,p.billtime,e.name name
-		FROM
-		(SELECT c.name
-		billflag
-		from sys_code c ,biz_partsrepbill b
-		WHERE
-		c.`code`=b.billflag)
-		v,sys_code o,biz_partsrepbill p,biz_parts r,
-		sys_emp e
-		WHERE
-		o.`code`=p.billtype AND r.PartsId=p.partsid AND
-		e.id=p.billuser
-
-
+		select c.name billtype,billcount,partsname,billtime,e.name empname
+		from biz_parts b,sys_code c,sys_emp e,biz_partsrepbill b1
+		where b1.partsid = b.partsid and b1.billtype = c.code and e.id = b1.billuser
 	</select>
 
 	<select id="getCode" resultType="map" parameterType="string">
@@ -163,24 +150,12 @@
 	</select>
 
 	<select id="getBillsByLike" parameterType="map" resultType="map">
-		SELECT distinct v.billflag,o.name billtype,r.PartsName
-		partsname,p.billcount,p.billtime,e.name name
-		FROM
-		(SELECT c.name
-		billflag
-		from sys_code c ,biz_partsrepbill b
-		WHERE c.`code`=b.billflag)
-		v,sys_code o,biz_partsrepbill p,biz_parts r,
-		sys_emp e
-		WHERE
-		o.`code`=p.billtype AND r.PartsId=p.partsid AND e.id=p.billuser
-
+		select c.name billtype,billcount,partsname,billtime,e.name empname
+		from biz_parts b,sys_code c,sys_emp e,biz_partsrepbill b1
+		where b1.partsid = b.partsid and b1.billtype = c.code and e.id = b1.billuser
+		
 		<if test="map.partsname != null and map.partsname != ''">
 			and partsname like concat('%',#{map.partsname},'%')
-		</if>
-
-		<if test="map.billflag != null and map.billflag != ''">
-			and v.billflag = #{map.billflag}
 		</if>
 
 		<if test="map.billtype != null and map.billtype != ''">

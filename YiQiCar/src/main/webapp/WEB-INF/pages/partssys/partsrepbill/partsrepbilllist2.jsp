@@ -68,10 +68,6 @@
 						<option value="">请选择</option>
 				</select>
             </td>
-            <th align="right">出入库日期：</th>
-            <td>
-            	<input type="text" class="inputTextNormal" id="textfield2" name="billtime"/>
-            </td>
             <th align="right">
 				<input type="submit" class="btnShort" value="检索" />
 			</th>
@@ -85,7 +81,6 @@
     <table width="101%" border="0" cellpadding="0" cellspacing="1" class="commonTable">
         <tr>
             <th>序号</th>
-            <th>出/入库</th>
             <th>出入库类别</th>
             <th>配件名称</th>
             <th>数量</th>
@@ -96,12 +91,11 @@
        <c:forEach items="${info}" var="s" varStatus="l" >
        		<tr>
             <td align="center">${l.count}</td>
-            <td align="center">${s.billflag}</td>
             <td align="center">${s.billtype}</td>
 			<td align="center">${s.partsname}</td>
 			<td align="center">${s.billcount}</td>
 			<td align="center">${s.billtime}</td>
-			<td align="center">${s.name}</td>
+			<td align="center">${s.empname}</td>
         </tr>
        </c:forEach>
        
