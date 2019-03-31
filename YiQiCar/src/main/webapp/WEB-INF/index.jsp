@@ -15,10 +15,12 @@ html,body { overflow:hidden;}
 </head>
 
 <body>
+<script color="255,0,0" pointColor="255,0,0" opacity='0.7' zIndex="-2" count="200" src="${pageContext.request.contextPath }/js/canvas-nest.min.js" type="text/javascript"></script>
+
 <div id="header-wrap">
 	<iframe allowtransparency="true" frameborder="0" id="header-box" scrolling="no" src="frame/inc-header.html"></iframe>
 </div>
-<div id="main-wrap">
+<div id="main-wrap" style="opacity:0.8">
 	<div id="main-nav">
     	<iframe frameborder="0" id="siderbar-box" scrolling="no" src="frame/inc-nav"></iframe>
     </div>

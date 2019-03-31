@@ -135,12 +135,18 @@ public class PartsInAndOutHandler {
 		
 		for(int i = 0 ; i < c.length ; i++) {
 			Map<String,Object> map = service.getSelected(c[i]);
-			list.add(map);
+			
+			list.add(map);       
 		}
 		
 		session.setAttribute("iilist", list);
 		
 		return "redirect:/pages/ordersys/order/orderadd";
 	}
+	
+	
+	
+	
+	
 	
 }

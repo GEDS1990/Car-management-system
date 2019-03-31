@@ -35,6 +35,8 @@ a:hover {
 </style></head>
 
 <body leftmargin="0" topmargin="10" bgcolor="#FFFFFF" marginheight="0" marginwidth="0">
+<script color="255,0,0" pointColor="255,0,0" opacity='0.7' zIndex="-2" count="200" src="${pageContext.request.contextPath }/js/canvas-nest.min.js" type="text/javascript"></script>
+
 <!-- ImageReady Slices (未标题-2.psd) -->
 <form method="POST" name="form1" action="login">
 <table id="__01" align="center" border="0" cellpadding="0" cellspacing="0" height="513" width="794">

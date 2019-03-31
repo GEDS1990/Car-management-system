@@ -3,6 +3,7 @@ package com.oracle.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.oracle.vo.Order;
@@ -26,4 +27,12 @@ public interface OrderMapper {
     List<Map<String,Object>> getOrders(Map<String,Object> map);
     
     Map<String,Object> getOrderById(Integer orderid);
+    
+    List<String> getOrderCode();
+    
+    List<Map<String,Object>> getAllBills();
+    
+    void updateFlag(@Param("orderid") Integer orderid);
+    
+    void updateFlag1(@Param("orderid") Integer orderid);
 }

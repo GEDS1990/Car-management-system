@@ -31,6 +31,8 @@
 		where OrderId =
 		#{orderid,jdbcType=INTEGER}
 	</delete>
+	
+	
 	<insert id="insert" parameterType="com.oracle.vo.Order">
 		insert into biz_order
 		(OrderId, OrderCode, OrderDate,
@@ -40,6 +42,8 @@
 		#{orderdate,jdbcType=DATE},
 		#{orderflag,jdbcType=VARCHAR})
 	</insert>
+	
+	
 	<insert id="insertSelective" parameterType="com.oracle.vo.Order">
 		insert into biz_order
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -136,5 +140,22 @@
 		o.orderflag = s.code and orderid=#{orderid}
 	</select>
 
+	<select id="getOrderCode" resultType="string">
+		select ordercode from biz_order
+	</select>
+
+	<select id="getAllBills" resultType="map">
+		select orderid,ordercode,orderdate,name
+		from sys_code c,biz_order b
+		where c.code = b.orderflag
+	</select>
+
+	<update id="updateFlag" parameterType="integer">
+		update biz_order set orderflag = 2 where orderid=#{orderid}
+	</update>
+
+	<update id="updateFlag1" parameterType="integer">
+		update biz_order set orderflag = 3 where orderid=#{orderid}
+	</update>
 
 </mapper>

@@ -10,6 +10,30 @@
 <title>物资采购与产品整合管理系统</title>
 <link href="../../../css/main.css" rel="stylesheet" type="text/css" media="all" />
 <script src="${pageContext.request.contextPath }/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/js/canvas-nest.min.js" type="text/javascript"></script>
+<script>
+	
+
+$(document).ready(function(){
+	$("#id_code").blur(function(){
+		
+		var code = document.getElementById("id_code").value;
+		
+		$.ajax({
+			url:"check",
+			type:"POST",
+			data:{code : code},
+			success:function(res){
+				if(res[0] == "0"){
+					alert("该订单编号已存在，请重新输入！")
+				}
+			}
+		});	
+	})	
+})
+
+</script>
+
 
 <script>
  	
@@ -102,20 +126,22 @@ function deleteRow(tableID,t){
 </head>
 
 <body class="content-pages-body">
-<div class="content-pages-wrap">
+<script color="255,0,0" pointColor="255,0,0" opacity='0.7' zIndex="-2" count="200" src="${pageContext.request.contextPath }/js/canvas-nest.min.js" type="text/javascript"></script>
+
+<div class="content-pages-wrap" style="opacity:0.7">
     <div class="commonTitle">
         <h2>&gt;&gt; 新增订单</h2>
   </div>
-        <form id="coursesCreat" name="coursesCreat" action="" method="post">
+        <form id="coursesCreat" name="coursesCreat" action="save" method="post">
 		  <table border="0" cellspacing="1" cellpadding="0" class="commonTable">
 			  <tr>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单编码：</td>
-				<td width="15%" align="left"><input type="text" style="width:150px"></td>
+				<td width="15%" align="left"><input type="text" id="id_code" name="ordercode" placeholder="不可为空" style="width:150px"><span id="dis"></span></td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单保存日期：</td>
-				<td width="15%" align="left"><input type="text" name=""></td>
+				<td width="15%" align="left"><input type="text" placeholder="格式：2000-01-01" name="orderdate"></td>
 				<td width="10%" align="right" class="title"><span class="required">*</span>订单状态：</td>
 				<td width="15%" align="left">
-					<select id="orderstatus">
+					<select id="orderstatus" name="orderflag">
 						<option value="0" selected>未提交</option>
 						<option value="1">待审核</option>
 					</select>
@@ -124,10 +150,11 @@ function deleteRow(tableID,t){
 
 		 </table>
 	    <div align="left" style="margin-top:15px;margin-bottom:5px">
-	    	<a href="jump1" title="选择原料" class="btnShort">选择配件</a>
+	    	<a href="jump2" title="选择原料" class="btnShort">选择配件</a>
 	    </div>
 		<table width="90%" border="0" cellpadding="0" cellspacing="1" id="attachmentList" class="commonTable marginTopM">
-		  <tr>
+		  <tr>	
+		      <th>配件编号</th>
 	          <th>配件名称</th>
 	          <th>进货数量</th>
 			  <th>库存数量</th>
@@ -136,10 +163,11 @@ function deleteRow(tableID,t){
 	      
 	      <c:forEach items="${iilist}" var="s" varStatus="l">
 	      		<tr>
+	      			<td align="center" name="partsid">${s.partsid}</td>
 	      			<td align="center">${s.partsname}</td>
-	      			<td align="center">	请输入数量：<input type="text" name="count" id="num" placeholder="进货量不可为空" onblur="on_blur(this)"></td>
+	      			<td align="center" >请输入数量：<input type="text" name="orderpartscount" style="width: 40px" placeholder="不为空" onblur="on_blur(this)"></td>
 	      			<td align="center">${s.partsreqcount}</td>
-	      			<td align="center"></td>
+	      			<td align="center"><a href="delete?partsid=${s.partsid}" class="btnIconDel" title="删除"></a></td></td>
 	      		</tr>
 	      </c:forEach>
 	      
@@ -150,8 +178,8 @@ function deleteRow(tableID,t){
     <!--//commonTable-->
     <div id="formPageButton">
     	<ul>
-			<li><a href="#" title="保存" class="btnShort">保存</a></li>
-			<li><a href="#" title="提交" class="btnShort">提交</a></li>
+			<li><a href="#" title="保存" class="btnShort" onclick="document:coursesCreat.submit()">保存</a></li>
+			<li><a href="#" title="提交" class="btnShort" onclick="document:coursesCreat.submit()">提交</a></li>
         	<li><a href="javascript:window.history.go(-1)" title="返回" class="btnShort">返回</a></li>
         </ul>
     </div>

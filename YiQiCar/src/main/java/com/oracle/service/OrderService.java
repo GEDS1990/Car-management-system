@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oracle.dao.OrderMapper;
+import com.oracle.vo.Order;
 
 @Service
 public class OrderService {
@@ -35,5 +36,33 @@ public class OrderService {
 		return dao.getOrderById(id);
 	}
 	
+	@Transactional
+	public List<String> getOrderCode(){
+		
+		return dao.getOrderCode();
+	}
 	
+	@Transactional
+	public void insert(Order order) {
+		
+		dao.insert(order);
+	}
+	
+	@Transactional
+	public List<Map<String,Object>> getAllBills() {
+		
+		return dao.getAllBills();
+	}
+	
+	@Transactional
+	public void updateFlag(Integer id) {
+		
+		dao.updateFlag( id);
+	}
+	
+	@Transactional
+	public void updateFlag1(Integer id) {
+		
+		dao.updateFlag1( id);
+	}
 }

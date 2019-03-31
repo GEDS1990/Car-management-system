@@ -29,7 +29,9 @@
 
 </head>
 
-<body class="content-pages-body">
+<body class="content-pages-body" style="opacity:0.7">
+<script color="255,0,0" pointColor="255,0,0" opacity='0.7' zIndex="-2" count="200" src="${pageContext.request.contextPath }/js/canvas-nest.min.js" type="text/javascript"></script>
+
 	<div class="content-pages-wrap">
 		<div class="commonTitle">
 			<h2>&gt;&gt; 配件管理</h2>

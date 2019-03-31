@@ -43,7 +43,9 @@
 </head>
 
 <body class="content-pages-body">
-<div class="content-pages-wrap">
+<script color="255,0,0" pointColor="255,0,0" opacity='0.7' zIndex="-2" count="200" src="${pageContext.request.contextPath }/js/canvas-nest.min.js" type="text/javascript"></script>
+
+<div class="content-pages-wrap" style="opacity:0.7">
 	<div class="commonTitle">
 	  <h2>&gt;&gt; 配件库存流水账查询</h2>
 	</div>
