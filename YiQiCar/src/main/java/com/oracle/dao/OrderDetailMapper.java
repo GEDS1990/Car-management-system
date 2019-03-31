@@ -27,4 +27,7 @@ public interface OrderDetailMapper {
     void updateNum(@Param("partsid") Integer partsid,@Param("partsreqcount") Integer count);
     
     List<Map<String,Object>> getChecks(Map<String,Object> map);
+    
+    
+    
 }

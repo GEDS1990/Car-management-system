@@ -97,7 +97,7 @@
 					<td align="center">${s.ordercode}</td>
 					<td align="center">${s.orderdate}</td>
 					<td class='s'  align="center"><span>${s.name}</span></td>
-					<td align="center"><a href="order-view.html"
+					<td align="center"><a href="../search1?orderid=${s.orderid}"
 						class="btnIconView" title="查看详情"></a> <a
 						href="../search?orderid=${s.orderid}" class="btnIconEdit"
 						title="更新"></a> <a href="#" class="btnIconDel" title="删除"></a></td>

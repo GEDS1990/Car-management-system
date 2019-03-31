@@ -85,7 +85,7 @@ function deleteRow(tableID,t){
 
 <div class="content-pages-wrap" style="opacity:0.7">
     <div class="commonTitle">
-        <h2>&gt;&gt; 订单信息修改</h2>
+        <h2>&gt;&gt; 订单详细信息</h2>
   </div>
         <form id="coursesCreat" name="coursesCreat" action="" method="post">
 		  <table border="0" cellspacing="1" cellpadding="0" class="commonTable">
@@ -102,7 +102,7 @@ function deleteRow(tableID,t){
 
 		 </table>
 	    <div align="left" style="margin-top:15px;margin-bottom:5px">
-	    	<a href="jump2" title="选择原料" class="btnShort">新增配件</a>
+	    	<a href="javascript:void(0)" title="选择原料" class="btnShort">订单明细</a>
 	    </div>
 		<table width="90%" border="0" cellpadding="0" cellspacing="1" id="attachmentList" class="commonTable marginTopM">
 		   <tr>	
@@ -110,16 +110,14 @@ function deleteRow(tableID,t){
 	          <th>配件名称</th>
 	          <th>进货数量</th>
 			  <th>库存数量</th>
-	          <th class="editColXS">操作</th>
 	      </tr>
 	      
 	      <c:forEach items="${mlist}" var="s" varStatus="l">
 	      		<tr>
 	      			<td align="center">${s.partsid}</td>
 	      			<td align="center">${s.partsname}</td>
-	      			<td align="center" >当前订单数量：<input type="text" name="orderpartscount" value="${s.orderpartscount}" style="width: 40px" placeholder="不为空" onblur="on_blur(this)"></td>
+	      			<td align="center" >${s.orderpartscount}</td>
 	      			<td align="center">${s.partsreqcount}</td>
-	      			<td align="center"><a href="delete1?partsid=${s.partsid}" class="btnIconDel" title="删除"></a></td></td>
 	      		</tr>
 	      </c:forEach>
 		</table>
@@ -128,8 +126,6 @@ function deleteRow(tableID,t){
     <!--//commonTable-->
     <div id="formPageButton">
     	<ul>
-			<li><a href="#" title="保存" class="btnShort">保存</a></li>
-			<li><a href="#" title="提交" class="btnShort">提交</a></li>
         	<li><a href="javascript:window.history.go(-1)" title="返回" class="btnShort">返回</a></li>
         </ul>
     </div>

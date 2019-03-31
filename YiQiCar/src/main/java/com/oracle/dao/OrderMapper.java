@@ -35,4 +35,6 @@ public interface OrderMapper {
     void updateFlag(@Param("orderid") Integer orderid);
     
     void updateFlag1(@Param("orderid") Integer orderid);
+    
+    List<Map<String,Object>> getBillDetail(Integer orderid);
 }

@@ -90,13 +90,30 @@ public class OrderHandler {
 		
 		Map<String,Object> imap = service.getOrderById(orderid);
 		
-		System.out.println(imap);
+		List<Map<String,Object>> mlist = service.getBillDetail(orderid);
+		
+		session.setAttribute("mlist", mlist);
 		
 		session.setAttribute("imap", imap);
 		
 		return "/pages/ordersys/order/orderedit";
 	}
 	
+	
+	@RequestMapping("/search1")
+	public String getById1(Integer orderid,HttpSession session) {
+		
+		Map<String,Object> imap = service.getOrderById(orderid);
+		
+		List<Map<String,Object>> mlist = service.getBillDetail(orderid);
+			
+		session.setAttribute("mlist", mlist);
+		
+		session.setAttribute("imap", imap);
+		
+		return "pages/ordersys/order/order-view";
+	}
+
 	
 	@RequestMapping(value = "/{path}")
 	public String frame(@PathVariable("path") String path) {
@@ -127,25 +144,28 @@ public class OrderHandler {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		list = (List<Map<String, Object>>) session.getAttribute("iilist");
 		
-		for(Map<String,Object> map : list) {
-			int i = 0;
-			if(map.containsValue(partsid)) {
-				list.remove(i);
+		try {
+			for(Map<String,Object> map : list) {
+				int i = 0;
+				if(map.containsValue(partsid)) {
+					list.remove(i);
+				}
+				i++;
 			}
-			i++;
+			
+			session.setAttribute("iilist", list);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		
-		session.setAttribute("iilist", list);
-		
+	
 		return "redirect:/pages/ordersys/order/orderadd";
 	}
 	
 	@RequestMapping("/save")
 	public String save(Order order,Integer [] orderpartscount,HttpSession session) {
 		
-		System.out.println("-------");
-		System.out.println("-------");
-		System.out.println("-------");
+
 		
 		System.out.println(Arrays.toString(orderpartscount));
 		
@@ -157,11 +177,7 @@ public class OrderHandler {
 		String partsid = "partsid";
 		
 		Integer orderid = service1.getOrderId(order.getOrdercode());
-		
-		System.out.println("-------");
-		System.out.println("-------");
-		System.out.println("-------");
-		
+	
 		int i = 0;
 		
 		for(Map<String,Object> map : list) {
@@ -220,11 +236,6 @@ public class OrderHandler {
 	public String getCheck(HttpSession session,String ordercode,String orderdate,String orderflag) {
 		
 		
-		System.out.println("---------");
-		System.out.println("---------");
-		System.out.println("---------");
-		System.out.println("like");
-		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -239,4 +250,28 @@ public class OrderHandler {
 
 		return "/pages/ordersys/order/orderchecklist2";
 	}
+	
+	
+	@RequestMapping("/delete1")
+	public String delete1(Integer partsid,HttpSession session) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		list = (List<Map<String, Object>>) session.getAttribute("mlist");
+		try{
+			for(Map<String,Object> map : list) {
+				int i = 0;
+				if(map.containsValue(partsid)) {
+					list.remove(i);
+				}
+				i++;
+			}
+			
+			session.setAttribute("mlist", list);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "pages/ordersys/order/orderedit";
+	}
+	
 }

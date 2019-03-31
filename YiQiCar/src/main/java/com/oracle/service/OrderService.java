@@ -65,4 +65,11 @@ public class OrderService {
 		
 		dao.updateFlag1( id);
 	}
+	
+	@Transactional
+	public List<Map<String,Object>> getBillDetail(Integer orderid){
+		
+		return dao.getBillDetail(orderid);
+	}
+	
 }

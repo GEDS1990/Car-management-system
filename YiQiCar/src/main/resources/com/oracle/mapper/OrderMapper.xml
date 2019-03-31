@@ -158,4 +158,11 @@
 		update biz_order set orderflag = 3 where orderid=#{orderid}
 	</update>
 
+	<select id="getBillDetail" resultType="map" parameterType="integer">
+		select b1.partsid,partsname,orderpartscount,partsreqcount
+		from biz_partsrepertory b,biz_parts b1,biz_orderdetail b2,biz_order b3
+		where b3.orderid = b2.orderid and b2.partsid = b1.partsid and b2.partsid = b.partsid
+		and b3.orderid=#{orderid}
+	</select>
+
 </mapper>
